@@ -2,8 +2,10 @@ import { Component, View, EventEmitter, FORM_DIRECTIVES } from 'angular2/angular
 
 @Component({
   selector: 'filter-textbox',
-  outputs: ['changed'],
-  inputs: ['text'],
+  events: ['changed'],
+  properties: ['text']
+})
+@View({
   template: `
     <form>
          Filter:
@@ -27,4 +29,10 @@ export class FilterTextboxComponent {
         event.preventDefault();
         this.changed.next(this.model.filter); //Raise changed event
     }
+
+    onChanges(changes: any) {
+      console.log('Change in FilterTextboxComponent: ');
+      console.log(changes);
+    }
+
 }
